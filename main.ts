@@ -20,6 +20,7 @@ function count_hoops_in_motion () {
         calc_distance_moved(update_ndx)
         if (distance_return == 0) {
             draw_circle(this_hoop, N_this_hoop_points, red)
+            remove_slowest_hoop()
         } else {
             hoops_in_motion_return += 1
             if (distance_prior == 0) {
@@ -235,7 +236,7 @@ New_countdown = false
 clr_cnt = 11
 Level = 1
 // lower values are most sticky
-stickiness = 31
+stickiness = 131
 max_velocity = 100 / Level
 info.setLife(Level)
 init_constants()
@@ -248,7 +249,7 @@ game.onUpdate(function () {
         info.startCountdown(change_per_level * Level)
     }
     time = game.runtime() - prior_time
-    if (time > 200) {
+    if (time > 100) {
         prior_time = game.runtime()
         count_hoops_in_motion()
         info.setScore(hoops_in_motion_return)
